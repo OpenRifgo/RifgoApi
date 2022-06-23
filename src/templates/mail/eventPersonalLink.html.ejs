@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= subject %></title>
+    <style>
+        h3 {
+            font-family: Arial, sans-serif;
+        }
+
+        h4 {
+            font-family: Arial, sans-serif;
+            color: gray;
+        }
+
+        .baton {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 14px 28px;
+            color: #ffffff !important;
+            background: #007AFF;
+            border-radius: 11px;
+            border: 2px solid #007AFF;
+        }
+
+        .baton:hover {
+            background: #106cad;
+            color: #ffffff;
+            border: 2px solid #106cad;
+            transition: all 0.2s ease;
+        }
+
+        .whatsapp {
+            background: #25D366;
+            margin: 8px auto
+        }
+        .whatsapp:hover {
+            background: #15AB4D;
+        }
+    </style>
+</head>
+<body>
+
+<h3>
+    <b><%= subject %></b>
+</h3>
+<br>
+
+You have successfully registered for the webinar <b><%= event.name %></b>.<br />
+Please use this link to join:
+
+<br>
+<br>
+
+<a class="baton" href="<%= eventUrl %>" target="_blank" title="Event link">Join</a>
+<br>
+
+<a class="baton whatsapp" href="<%= whatsappURI %>" target="_blank" title="Share via Whatsapp">
+    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4926 23.7938H12.4876C10.4973 23.7931 8.5415 23.2937 6.80446 22.3462L0.5 24L2.18718 17.8374C1.14644 16.0338 0.598816 13.9879 0.599708 11.8919C0.602317 5.33474 5.93735 0 12.4924 0C15.6739 0.00137307 18.6598 1.23989 20.9052 3.48784C23.1505 5.73568 24.3864 8.72361 24.3851 11.9013C24.3825 18.4569 19.0496 23.7911 12.4926 23.7938ZM7.09666 20.1934L7.4576 20.4076C8.97525 21.3082 10.7149 21.7848 12.4887 21.7855H12.4927C17.9408 21.7855 22.375 17.3511 22.3772 11.9007C22.3782 9.25951 21.3511 6.77608 19.4848 4.90766C17.6186 3.03925 15.1368 2.00979 12.4966 2.00887C7.0442 2.00887 2.60991 6.44276 2.60775 11.8927C2.60698 13.7605 3.12957 15.5794 4.11905 17.1532L4.35407 17.5272L3.3555 21.1748L7.09666 20.1934ZM18.0763 14.4617C18.2836 14.5618 18.4235 14.6295 18.4833 14.7292C18.5575 14.8531 18.5575 15.4481 18.31 16.1423C18.0623 16.8364 16.8752 17.4699 16.3042 17.5552C15.7923 17.6318 15.1444 17.6637 14.4326 17.4375C14.001 17.3005 13.4475 17.1177 12.7386 16.8115C9.95276 15.6086 8.07015 12.9086 7.71434 12.3983C7.68942 12.3626 7.67198 12.3376 7.66226 12.3246L7.65986 12.3214C7.50261 12.1115 6.44889 10.7056 6.44889 9.25059C6.44889 7.88181 7.12126 7.16436 7.43075 6.83412C7.45195 6.8115 7.47145 6.79069 7.48892 6.77161C7.76129 6.47411 8.08324 6.39974 8.28133 6.39974C8.47941 6.39974 8.67773 6.40157 8.85086 6.41027C8.87222 6.41134 8.89445 6.41121 8.91742 6.41107C9.09058 6.41006 9.30647 6.40879 9.51945 6.92036C9.60139 7.11725 9.72128 7.40915 9.84774 7.717C10.1034 8.3395 10.3859 9.02726 10.4356 9.12678C10.5099 9.27553 10.5594 9.449 10.4604 9.64741C10.4455 9.67715 10.4318 9.70523 10.4186 9.73206C10.3442 9.88394 10.2895 9.99566 10.1633 10.1431C10.1136 10.2011 10.0623 10.2636 10.011 10.326C9.90875 10.4505 9.80653 10.575 9.71751 10.6637C9.56875 10.8119 9.41389 10.9727 9.58723 11.2702C9.76057 11.5677 10.3569 12.5407 11.2403 13.3287C12.1899 14.1757 13.0153 14.5337 13.4336 14.7151C13.5153 14.7506 13.5815 14.7793 13.63 14.8036C13.9271 14.9524 14.1004 14.9275 14.2738 14.7292C14.4471 14.5309 15.0166 13.8615 15.2147 13.564C15.4127 13.2667 15.6109 13.3162 15.8832 13.4153C16.1557 13.5146 17.6166 14.2334 17.9138 14.3821C17.9718 14.4112 18.026 14.4374 18.0763 14.4617Z" fill="#FDFDFD"/>
+    </svg>
+    Share via Whatsapp
+</a>
+
+
+<br>
+<br>
+
+Note: This link should not be shared with others - it is unique for you.
+If you would like to invite your colleagues or friends, please share registration link with them.
+<a href="<%= registrationUrl %>">Registration form</a>
+
+</body>
+</html>

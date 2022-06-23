@@ -1,0 +1,75 @@
+stages:
+  - build
+  - deploy
+
+build_image:
+  stage: build
+  only:
+    - master
+  script:
+    - docker info
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA .
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:latest
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+deploy_prod:
+  stage: deploy
+  only:
+    - master
+  script:
+    # restart web container #1
+    - docker stop rifgo_app_1 || true
+    - docker container rm rifgo_app_1 || true
+    - docker run --name rifgo_app_1 --env-file $PROD_ENV -d -p 127.0.0.1:7000:7000 --restart unless-stopped -v /var/storage/rifgo/static/uploads:/app/static/uploads  $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    # restart web container #2
+    - docker stop rifgo_app_2 || true
+    - docker container rm rifgo_app_2 || true
+#    - docker run --name rifgo_app_2 --env-file $PROD_ENV -d -p 127.0.0.1:7001:7000 --restart unless-stopped $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+
+
+# staging
+build_image_to_ecr:
+  stage: build
+  tags:
+    - docker
+  only:
+    - staging
+  environment:
+    name: staging
+  image:
+    name: docker:latest
+  services:
+    - docker:19.03.13-dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+  script:
+    - apk add --no-cache python3 py3-pip curl
+    - pip3 install --upgrade pip
+    - pip3 install --no-cache-dir awscli
+    - rm -rf /var/cache/apk/*
+    - docker info
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY_IMAGE
+    - mkdir -vp ~/.docker/cli-plugins/
+    - curl --silent -L "https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
+    - chmod a+x ~/.docker/cli-plugins/docker-buildx
+    - docker buildx build --pull --platform linux/arm64 -t $ECR_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA --push .
+
+deploy_to_ecs:
+  stage: deploy
+  tags:
+    - docker
+  only:
+    - staging
+  environment:
+    name: staging
+  script:
+    - apt-get update
+    - apt-get install -y python3 python3-pip jq gettext-base
+    - pip3 install --upgrade pip
+    - pip3 install awscli
+    - cd .ci
+    - IMAGE_URI=$ECR_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - export IMAGE_URI
+    - ./deploy.sh

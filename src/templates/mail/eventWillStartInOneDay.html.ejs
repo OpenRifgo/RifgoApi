@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= subject %></title>
+    <style>
+        h3 {
+            font-family: Arial, sans-serif;
+        }
+
+        h4 {
+            font-family: Arial, sans-serif;
+            color: gray;
+        }
+
+        .baton {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 14px 28px;
+            color: #ffffff !important;
+            background: #007AFF;
+            border-radius: 11px;
+            border: 2px solid #007AFF;
+        }
+
+        .baton:hover {
+            background: #106cad;
+            color: #ffffff;
+            border: 2px solid #106cad;
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+
+<h3>
+    <b><%= subject %></b>
+</h3>
+<br>
+
+<p>
+    Hi! This is a reminder that the <%= event.name %> stream will begin tomorrow.
+</p>
+<p>
+    <strong>Date:</strong> <%= dateFormatted %>
+    <br />
+    <strong>Time:</strong> <%= timeFromFormatted %> <%= timezoneFormatted %>
+</p>
+<p>
+    Speaker: <%= event.speakerName %>, <%= event.speakerTitle %>
+</p>
+<p>
+    <a class="baton" href="<%= eventUrl %>" target="_blank" title="Event link">Link to the stream</a>
+</p>
+
+<% if (smm.insta || smm.fb) { %><p>
+    Follow <%= event.speakerName %> on social media:<br />
+    <% if (smm.insta) { %>Instagram (<a href="<%= smm.insta %>"><%= smm.insta %></a>)<br /><% } %>
+    <% if (smm.fb) { %>Facebook (<a href="<%= smm.fb %>"><%= smm.fb %></a>)<br /><% } %>
+</p><% } %>
+
+<p>
+Note: This link should not be shared with others - it is unique for you.
+If you would like to invite your colleagues or friends, please share registration link with them.
+<br />
+<a href="<%= registrationUrl %>">Registration form</a>
+</p>
+
+</body>
+</html>

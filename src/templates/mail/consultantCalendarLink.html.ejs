@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= subject %></title>
+    <style>
+        h3 {
+            font-family: Arial, sans-serif;
+        }
+
+        h4 {
+            font-family: Arial, sans-serif;
+            color: gray;
+        }
+
+        .baton {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 14px 28px;
+            color: #ffffff !important;
+            background: #007AFF;
+            border-radius: 11px;
+            border: 2px solid #007AFF;
+        }
+
+        .baton:hover {
+            background: #106cad;
+            color: #ffffff;
+            border: 2px solid #106cad;
+            transition: all 0.2s ease;
+        }
+
+        .whatsapp {
+            background: #25D366;
+            margin: 8px auto
+        }
+
+        .whatsapp:hover {
+            background: #15AB4D;
+        }
+    </style>
+</head>
+<body>
+
+<h3>
+    <b><%= subject %></b>
+</h3>
+<br>
+
+You have successfully booked <b><%= booking.offer.title %></b>.<br/>
+Please use this link to pick date and time that fits you:
+
+<br>
+<br>
+
+<a class="baton" href="<%= booking.calendarLink %>" target="_blank" title="Event link">Book</a>
+<br>
+
+<br>
+<br>
+
+<!--If you would like to invite your colleagues or friends, please share registration link with them.-->
+<!--<a href="">Registration form</a>-->
+
+</body>
+</html>

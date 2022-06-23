@@ -1,0 +1,10 @@
+{
+    "cluster": "rifgo",
+    "service": "staging-web-api",
+    "taskDefinition": "${TASKDEFINITION_ARN}",
+    "desiredCount": 1,
+    "deploymentConfiguration": {
+        "maximumPercent": 100,
+        "minimumHealthyPercent": 0
+    }
+}

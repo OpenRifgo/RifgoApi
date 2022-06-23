@@ -1,0 +1,18 @@
+{
+    "cluster": "rifgo",
+    "serviceName": "staging-web-api",
+    "taskDefinition": "${TASKDEFINITION_ARN}",
+    "loadBalancers": [
+        {
+            "targetGroupArn": "${TARGET_GROUP_ARN}",
+            "containerName": "api",
+            "containerPort": ${NODE_PORT}
+        }
+    ],
+    "enableExecuteCommand": true,
+    "desiredCount": 1,
+    "deploymentConfiguration": {
+        "maximumPercent": 100,
+        "minimumHealthyPercent": 0
+    }
+}

@@ -1,0 +1,80 @@
+{
+  "family": "${ECS_TASK_NAME}",
+  "taskRoleArn": "${ECS_TASK_ROLE_ARN}",
+  "containerDefinitions": [
+    {
+      "name": "api",
+      "image": "${IMAGE_URI}",
+      "memory": 256,
+      "cpu": 250,
+      "portMappings": [
+        {
+          "containerPort": ${NODE_PORT},
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "staging/var/log/docker",
+          "awslogs-region": "${AWS_DEFAULT_REGION}",
+          "awslogs-stream-prefix": "streaming"
+        }
+      },
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "${NODE_ENV}"
+        },
+        {
+          "name": "API_ROOT",
+          "value": "${API_ROOT}"
+        },
+        {
+          "name": "FRONTEND_ROOT",
+          "value": "${FRONTEND_ROOT}"
+        },
+        {
+          "name": "SESSION_COOKIE_SECURE",
+          "value": "${SESSION_COOKIE_SECURE}"
+        },
+        {
+          "name": "HOST",
+          "value": "0.0.0.0"
+        },
+        {
+          "name": "DATABASE_NAME",
+          "value": "${DATABASE_NAME}"
+        },
+        {
+          "name": "DATABASE_USER",
+          "value": "${DATABASE_USER}"
+        },
+        {
+          "name": "DATABASE_PASSWORD",
+          "value": "${DATABASE_PASSWORD}"
+        },
+        {
+          "name": "DATABASE_HOST",
+          "value": "${DATABASE_HOST}"
+        },
+        {
+          "name": "DATABASE_PORT",
+          "value": "${DATABASE_PORT}"
+        },
+        {
+          "name": "STRIPE_PUBLIC_KEY",
+          "value": "${STRIPE_PUBLIC_KEY}"
+        },
+        {
+          "name": "STRIPE_SECRET_KEY",
+          "value": "${STRIPE_SECRET_KEY}"
+        },
+        {
+          "name": "STRIPE_ACCOUNT_ID",
+          "value": "${STRIPE_ACCOUNT_ID}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= topic || siteDisplayName || 'RIFGO' %></title>
+  <style>
+    h3 {
+      font-family: Arial, sans-serif;
+    }
+
+    h4 {
+      font-family: Arial, sans-serif;
+      color: grey;
+    }
+
+    .text_grey {
+        color: grey;
+    }
+
+    .btn {
+      display: inline-block;
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: none;
+      padding: 14px 28px;
+      color: #ffffff !important;
+      background: #615DFF;
+      border-radius: 11px;
+      border: 2px solid #615DFF;
+    }
+
+    .btn:hover {
+      background: #615DFF;
+      color: #ffffff;
+      border: 2px solid #615DFF;
+      transition: all 0.2s ease;
+    }
+
+    <%- styles || '' %>
+  </style>
+</head>
+<body>
+<%- content || '' %>
+<p class="text_grey">
+    Best regards,<br />
+    <a href="<%= siteAddress || 'https://rifgo.com' %>" target="_blank"
+       style="text-decoration:underline; color:#434343;"><%= siteDisplayName || 'RIFGO' %></a> team
+</p>
+</body>
+</html>

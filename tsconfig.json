@@ -1,0 +1,17 @@
+{
+   "compilerOptions": {
+      "lib": [
+         "es2019"
+      ],
+      "target": "es2019",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "./build",
+      "rootDir": "./src",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true,
+      "esModuleInterop": true
+   },
+   "exclude": ["tests", "node_modules"]
+}
