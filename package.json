@@ -40,5 +40,6 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "NODE_ENV=development ts-node-dev --respawn --poll --notify false --prefer-ts --ignore-watch node_modules -- src/index.ts"
-  }
+  },
+  "license": "Apache-2.0"
 }
